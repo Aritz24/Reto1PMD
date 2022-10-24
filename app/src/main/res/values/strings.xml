@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">OFC_Gacha</string>
+    <string name="txt_userESP">Usuario</string>
+    <string name="txt_userEN">User</string>
+    <string name="txt_passwdESP">Contraseña</string>
+    <string name="txt_passwdEN">Password</string>
+    <string name="txt_buttonESP">Iniciar</string>
+    <string name="txt_buttonEN">Start</string>
+    <string name="txt_registerESP">Crear cuenta</string>
+    <string name="txt_registerEN">Create account</string>
+    <string name="error_incorretuserESP">usuario no encontrado</string>
+    <string name="error_incorretuserEN">User not found</string>
+    <string name="error_incorrectpasswdESP">Contraseña incorrecta</string>
+    <string name="error_incorrectpasswdEN">Incorect password</string>
+</resources>
