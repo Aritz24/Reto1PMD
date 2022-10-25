@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="txt_userEN">User</string>
+    <string name="txt_passwdEN">Password</string>
+    <string name="txt_buttonEN">Start</string>
+    <string name="txt_registerEN">Create account</string>
+    <string name="error_incorretuserEN">User not found</string>
+    <string name="error_incorrectpasswdEN">Incorect password</string>
+</resources>

@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/2dam/AndroidStudioProjects/OFC_Gacha/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/2dam/AndroidStudioProjects/OFC_Gacha/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/2dam/AndroidStudioProjects/OFC_Gacha/app/src/main/res/layout/activity_sign_in_window.xml" value="0.4" />
+        <entry key="..\:/Users/2dam/AndroidStudioProjects/OFC_Gacha/app/src/main/res/layout/activity_sign_up_window.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
