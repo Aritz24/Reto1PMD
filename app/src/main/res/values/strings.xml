@@ -1,11 +1,11 @@
 <resources>
 
-    <string name="txt_user">Usuario</string>
-    <string name="txt_passwd">Contraseña</string>
-    <string name="txt_button">Iniciar</string>
-    <string name="txt_register">Crear cuenta</string>
-    <string name="error_incorretuser">usuario no encontrado</string>
-    <string name="error_incorrectpasswd">Contraseña incorrecta</string>
+    <string name="txt_user" translatable="false">Usuario</string>
+    <string name="txt_passwd" translatable="false">Contraseña</string>
+    <string name="txt_button" translatable="false">Iniciar</string>
+    <string name="txt_register" translatable="false">Crear cuenta</string>
+    <string name="error_incorretuser" translatable="false">usuario no encontrado</string>
+    <string name="error_incorrectpasswd" translatable="false">Contraseña incorrecta</string>
 
 
 

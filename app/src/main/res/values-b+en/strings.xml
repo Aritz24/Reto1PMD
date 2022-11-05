@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="txt_userEN">User</string>
-    <string name="txt_passwdEN">Password</string>
-    <string name="txt_buttonEN">Start</string>
-    <string name="txt_registerEN">Create account</string>
-    <string name="error_incorretuserEN">User not found</string>
-    <string name="error_incorrectpasswdEN">Incorect password</string>
+    <string name="txt_userEN" tools:ignore="ExtraTranslation">User</string>
+    <string name="txt_passwdEN" tools:ignore="ExtraTranslation">Password</string>
+    <string name="txt_buttonEN" tools:ignore="ExtraTranslation">Start</string>
+    <string name="txt_registerEN" tools:ignore="ExtraTranslation">Create account</string>
+    <string name="error_incorretuserEN" tools:ignore="ExtraTranslation">User not found</string>
+    <string name="error_incorrectpasswdEN" tools:ignore="ExtraTranslation">Incorect password</string>
 </resources>
