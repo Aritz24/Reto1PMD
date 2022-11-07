@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <string name="app_name" tools:ignore="ExtraTranslation"> Gacha</string>
     <string name="txt_userEN" tools:ignore="ExtraTranslation">User</string>
     <string name="txt_passwdEN" tools:ignore="ExtraTranslation">Password</string>
     <string name="txt_buttonEN" tools:ignore="ExtraTranslation">Start</string>

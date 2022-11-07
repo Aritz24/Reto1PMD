@@ -1,10 +1,12 @@
 package com.example.ofc_gacha;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,19 +35,25 @@ public class SignInWindow extends AppCompatActivity {
 
 
         dataBase= openOrCreateDatabase("Gacha", Context.MODE_PRIVATE, null);
-        dataBase.execSQL("Create TABLE IF NOT EXISTS usuarios (idUsuario INTEGER, nombre VARCHAR, contraseña VARCHAR)");
+        dataBase.execSQL("CREATE TABLE IF NOT EXISTS usuarios (idUsuario INTEGER, nombre VARCHAR, contraseña VARCHAR)");
         dataBase.execSQL("CREATE TABLE IF NOT EXISTS personajes (idPersonaje INTEGER, nombre VARCHAR, descripcion VARCHAR)");
         dataBase.execSQL("CREATE TABLE IF NOT EXISTS biblioteca (idUsuario INTEGER, idPersonaje INTEGER)");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Miku Nakano', 'Anime: Gotoubun no hanayome')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Kaguya Shinomiya', 'Anime: Kaguya-sama: Love is war')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('', 'Anime: ')");
         signIn= findViewById(R.id.signInButton);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (username.getText().toString().isEmpty() || passwd.getText().toString().isEmpty()){
-
-                }else if(!comprobarBD()){
+                   // AlertDialog.Builder ab= new AlertDialog.Builder();
+                //}else if(!comprobarBD()){
 
                 }else{
-
+                    /*intent = new Intent(gachaWindow.this, gachaWindow.class);
+                    intent.setData(Uri.parse(username.getText().toString()));
+                    intent.setData(Uri.parse(passwd.getText().toString()));
+                    startActivityForResult(intent, GachaWindow);*/
                 }
             }
         });
@@ -70,7 +78,7 @@ public class SignInWindow extends AppCompatActivity {
     }
 
     public boolean comprobarBD(){
-        if (dataBase.rawQuery("SELECT * FROM usuarios WHERE nombre="+username.getText().toString()+"").isNull()){
+        if (dataBase.rawQuery("SELECT * FROM usuarios WHERE nombre='"+username.getText().toString()+"'")){
 
         }
         return true;
