@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,14 +41,23 @@ public class SignInWindow extends AppCompatActivity {
         dataBase.execSQL("CREATE TABLE IF NOT EXISTS biblioteca (idUsuario INTEGER, idPersonaje INTEGER)");
         dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Miku Nakano', 'Anime: Gotoubun no hanayome')");
         dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Kaguya Shinomiya', 'Anime: Kaguya-sama: Love is war')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('', 'Anime: ')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Erza Scarlet', 'Anime: Fairy Tail')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Camie Utsushimi', 'Anime: Boku no hero')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Miku Hatsune', 'Idol Virtual ')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Emilia', 'Anime: Re:Zero')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Ai Hayasaka', 'Anime: Kaguya-sama: Love is War')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Jibril', 'Anime: No game no life')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Knekro/Sergio', 'Streamer de éxito')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Saber/Arturia Pendragón', 'Fate Stay Night')");
+        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Yor Forger', 'Anime: Spy x Family')");
+
         signIn= findViewById(R.id.signInButton);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (username.getText().toString().isEmpty() || passwd.getText().toString().isEmpty()){
-                   // AlertDialog.Builder ab= new AlertDialog.Builder();
-                //}else if(!comprobarBD()){
+
+                }else if(!comprobarBD()){
 
                 }else{
                     /*intent = new Intent(gachaWindow.this, gachaWindow.class);
@@ -78,9 +88,12 @@ public class SignInWindow extends AppCompatActivity {
     }
 
     public boolean comprobarBD(){
-        if (dataBase.rawQuery("SELECT * FROM usuarios WHERE nombre='"+username.getText().toString()+"'")){
-
+        String nom;
+        Cursor cursor= dataBase.rawQuery("SELECT nombre FROM usuarios WHERE nombre='"+username.getText().toString()+"'",null);
+        if (cursor.getCount()==0){
+            return false;
+        }else{
+            return true;
         }
-        return true;
     }
 }
