@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.PasswordAuthentication;
+import java.util.logging.Logger;
 
 public class SignInWindow extends AppCompatActivity {
 
@@ -25,7 +29,9 @@ public class SignInWindow extends AppCompatActivity {
     public static final int SignUpWindow= 1;
     public static final int GachaWindow= 2;
     private Intent intent;
-    private  SQLiteDatabase dataBase= null;
+    private SQLiteDatabase dataBase= null;
+    private Toast toast1;
+    private Cursor cursor;
 
 
     @Override
@@ -33,36 +39,66 @@ public class SignInWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_window);
 
-
-
         dataBase= openOrCreateDatabase("Gacha", Context.MODE_PRIVATE, null);
-        dataBase.execSQL("CREATE TABLE IF NOT EXISTS usuarios (idUsuario INTEGER, nombre VARCHAR, contraseña VARCHAR)");
+        dataBase.execSQL("CREATE TABLE IF NOT EXISTS usuarios (idUsuario INTEGER, nombre VARCHAR, contrasenia VARCHAR, email VARCHAR)");
         dataBase.execSQL("CREATE TABLE IF NOT EXISTS personajes (idPersonaje INTEGER, nombre VARCHAR, descripcion VARCHAR)");
-        dataBase.execSQL("CREATE TABLE IF NOT EXISTS biblioteca (idUsuario INTEGER, idPersonaje INTEGER)");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Miku Nakano', 'Anime: Gotoubun no hanayome')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Kaguya Shinomiya', 'Anime: Kaguya-sama: Love is war')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Erza Scarlet', 'Anime: Fairy Tail')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Camie Utsushimi', 'Anime: Boku no hero')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Miku Hatsune', 'Idol Virtual ')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Emilia', 'Anime: Re:Zero')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Ai Hayasaka', 'Anime: Kaguya-sama: Love is War')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Jibril', 'Anime: No game no life')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Knekro/Sergio', 'Streamer de éxito')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Saber/Arturia Pendragón', 'Fate Stay Night')");
-        dataBase.execSQL("INSERT INTO personajes (nombre, descripcion) VALUES ('Yor Forger', 'Anime: Spy x Family')");
+        dataBase.execSQL("CREATE TABLE IF NOT EXISTS biblioteca (nombre Varchar, idPersonaje INTEGER)");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (1,'Miku Nakano', 'Anime: Gotoubun no hanayome')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (2,'Kaguya Shinomiya', 'Anime: Kaguya-sama: Love is war')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (3,'Erza Scarlet', 'Anime: Fairy Tail')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (4,'Camie Utsushimi', 'Anime: Boku no hero')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (5,'Miku Hatsune', 'Idol Virtual ')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (6,'Emilia', 'Anime: Re:Zero')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (7,'Ai Hayasaka', 'Anime: Kaguya-sama: Love is War')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (8,'Jibril', 'Anime: No game no life')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (9,'Knekro/Sergio', 'Streamer de éxito')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (10,'Saber/Arturia Pendragón', 'Fate Stay Night')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (11,'Yor Forger', 'Anime: Spy x Family')");
+        dataBase.execSQL("INSERT INTO personajes (idPersonaje, nombre, descripcion) VALUES (12,'Marin Kitagawa', 'Anime: Sono bisque doll')");
+        username= findViewById(R.id.textUsername);
+
+
+        passwd= findViewById(R.id.textPassword);
+
+        us= findViewById(R.id.usernameTextVeiw);
+
+        pas= findViewById(R.id.passwdTextView);
 
         signIn= findViewById(R.id.signInButton);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                try{
+                    dataBase.execSQL("INSERT INTO usuarios (nombre, contrasenia, email) VALUES ('a', 'a', 'a')");
+
+                }catch (Exception ex){
+                    Logger.getLogger(ex.getMessage());
+                }
+
+
                 if (username.getText().toString().isEmpty() || passwd.getText().toString().isEmpty()){
+                     toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.error_empty, Toast.LENGTH_SHORT);
 
-                }else if(!comprobarBD()){
+                    toast1.show();
+                }else if(!comprobarNombre()){
+                     toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.error_useduser, Toast.LENGTH_SHORT);
 
+                    toast1.show();
+               }else if(!comprobarPasswd()){
+                     toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.error_incorrectpasswd, Toast.LENGTH_SHORT);
+
+                    toast1.show();
                 }else{
                     /*intent = new Intent(gachaWindow.this, gachaWindow.class);
                     intent.setData(Uri.parse(username.getText().toString()));
-                    intent.setData(Uri.parse(passwd.getText().toString()));
                     startActivityForResult(intent, GachaWindow);*/
                 }
             }
@@ -76,20 +112,33 @@ public class SignInWindow extends AppCompatActivity {
                 startActivityForResult(intent, SignUpWindow);
             }
         });
-
-        username= findViewById(R.id.textPersonName);
-
-        passwd= findViewById(R.id.textPasswd);
-
-        us= findViewById(R.id.usernameTextVeiw);
-
-        pas= findViewById(R.id.passwdTextView);
-
     }
 
-    public boolean comprobarBD(){
-        String nom;
-        Cursor cursor= dataBase.rawQuery("SELECT nombre FROM usuarios WHERE nombre='"+username.getText().toString()+"'",null);
+    private boolean comprobarPasswd() {
+
+        try{
+            cursor= dataBase.rawQuery("SELECT contrasenia FROM usuarios WHERE nombre='"
+                    +username.getText().toString()+"'",null);
+
+        }catch(Exception ex){
+            Logger.getLogger(ex.getMessage());
+        }
+
+        while (cursor.moveToNext()) {
+            if (cursor.getString(0).equals(passwd.getText().toString())) {
+
+                return false;
+            } else if(!cursor.getString(0).equals(passwd.getText().toString())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean comprobarNombre(){
+         cursor= dataBase.rawQuery("SELECT nombre FROM usuarios WHERE nombre='"
+                +username.getText().toString()+"'",null);
         if (cursor.getCount()==0){
             return false;
         }else{

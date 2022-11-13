@@ -7,6 +7,8 @@
     <string name="txt_register" translatable="false">Crear cuenta</string>
     <string name="error_incorretuser" translatable="false">usuario no encontrado</string>
     <string name="error_incorrectpasswd" translatable="false">Contraseña incorrecta</string>
+    <string name="error_useduser" translatable="false">El usuario introducido no existe</string>
+    <string name="error_empty" translatable="false">Los campos username o password no deben estar vacios</string>
 
 
 

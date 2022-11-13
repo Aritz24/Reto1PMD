@@ -11,4 +11,8 @@ public class SignUpWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_window);
     }
+
+    public void user(){
+
+    }
 }
